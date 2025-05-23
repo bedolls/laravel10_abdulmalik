@@ -82,8 +82,12 @@ Route::get('/mahasiswa', [mahasiswaController::class, 'index']);
 Route::get('/mahasiswa/tambah', [mahasiswaController::class, 'create']);
 
 //Data Dosen
-Route::get('/dosen', [dosenController::class, 'index'])->name('dosen.index');
+Route::get('/dosen', [dosenController::class, 'index'])->name('dosens.index');
 // Form Tambah Data Dosen
-Route::get('/dosen/create', [DosenController::class, 'create'])->name('dosens.create');
+Route::get('/dosen/tambah', [dosenController::class, 'create'])->name('dosens.create');
 // Simpan Data Dosen
-Route::post('/dosen', [DosenController::class, 'store'])->name('dosens.store');
+Route::post('/dosen', [dosenController::class, 'store'])->name('dosens.store');
+// edit data Dosen
+Route::get('/dosen/edit/{id}', [dosenController::class, 'edit'])->name('dosens.edit');
+// update data Dosen
+Route::put('/dosen/{id}', [dosenController::class, 'update'])->name('dosens.update');

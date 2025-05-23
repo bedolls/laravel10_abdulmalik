@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Dosen;
 use Illuminate\Http\Request;
+use App\Models\Dosen;
 
 class dosenController extends Controller
 {
@@ -13,8 +13,10 @@ class dosenController extends Controller
     public function index()
     {
         // menampilkan data dosen
-        $dosens = Dosen::all();
-        return view('dosen.index', compact('dosens'));
+        $nomor = 1;
+        $dosen = Dosen::all();
+        return view('Dosen.index',compact('dosen','nomor'));
+
     }
 
     /**
@@ -23,7 +25,7 @@ class dosenController extends Controller
     public function create()
     {
         // menampilkan form tambah
-        return view('Dosen.create');
+        return view('Dosen.form');
     }
 
     /**
@@ -32,23 +34,15 @@ class dosenController extends Controller
     public function store(Request $request)
     {
         // proses tambah
-        // Validasi data
-        $request->validate([
-            'nidn' => 'required|unique:dosens',
-            'nama' => 'required',
-            'email' => 'required|email',
-        ]);
+        $dosen = new Dosen;
+        $dosen->nidn = $request->nidn;
+        $dosen->nama = $request->nama;
+        $dosen->email = $request->email;
+        $dosen->rumpun = $request->rumpun;
+        $dosen->nohp = $request->nohp;
+        $dosen->save();
 
-        // // Simpan data ke database
-        Dosen::create([
-            'nidn' => $request->nidn,
-            'nama' => $request->nama,
-            'email' => $request->email,
-        ]);
-        // Simpan data ke database
-
-        // // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('dosen.index')->with('success', 'Data dosen berhasil disimpan.');
+        return redirect('/dosen');
     }
 
     /**
@@ -65,6 +59,8 @@ class dosenController extends Controller
     public function edit(string $id)
     {
         // form edit
+        $dosen = Dosen::find($id);
+        return view('Dosen.edit',compact('dosen'));
     }
 
     /**
