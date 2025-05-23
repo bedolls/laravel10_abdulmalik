@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\dosenController;
-use App\Http\Controllers\mahasiswaController;
 
 
 /*
@@ -18,7 +16,7 @@ use App\Http\Controllers\mahasiswaController;
 */
 
 Route::get('/home', function () {
-    return view('welcome');
+    return view('home');
 });
 
 // Route::get('/cth', function () {
@@ -77,17 +75,10 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Data Mahasiswa
-Route::get('/mahasiswa', [mahasiswaController::class, 'index']);
-Route::get('/mahasiswa/tambah', [mahasiswaController::class, 'create']);
-
 //Data Dosen
-Route::get('/dosen', [dosenController::class, 'index'])->name('dosens.index');
-// Form Tambah Data Dosen
-Route::get('/dosen/tambah', [dosenController::class, 'create'])->name('dosens.create');
-// Simpan Data Dosen
-Route::post('/dosen', [dosenController::class, 'store'])->name('dosens.store');
-// edit data Dosen
-Route::get('/dosen/edit/{id}', [dosenController::class, 'edit'])->name('dosens.edit');
-// update data Dosen
-Route::put('/dosen/{id}', [dosenController::class, 'update'])->name('dosens.update');
+Route::get('/dosen', [dosenController::class, 'index']);
+Route::get('/dosen/tambah', [dosenController::class, 'create']);
+Route::post('/dosen', [dosenController::class, 'store']);
+Route::get('/dosen/edit/{id}', [dosenController::class, 'edit']);
+Route::put('/dosen/{id}', [dosenController::class, 'update']);
+Route::delete('/dosen/{id}', [dosenController::class, 'destroy']);

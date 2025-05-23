@@ -8,7 +8,7 @@
                 <div class="card-header">Form Edit Data</div>
 
                 <div class="card-body">
-                    <form method="post" action="/Dosen/{{$dosen->id}}" enctype="multipart/form-data">
+                    <form method="post" action="/dosen/{{$dosen->id}}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
